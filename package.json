@@ -10,7 +10,13 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "body": "^5.1.0",
+    "body-parser": "^1.20.3",
+    "ejs": "^3.1.10",
     "express": "^4.21.1",
-    "nodemon": "^3.1.7"
+    "express-handlebars": "^8.0.1",
+    "nodemon": "^3.1.7",
+    "parser": "^0.1.4",
+    "pug": "^3.0.3"
   }
 }

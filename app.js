@@ -1,21 +1,35 @@
-const http = require('http');
-const express = require('express')
+const express = require('express');
+const bodyParser = require("body-parser"); // Correct spelling here
+const app = express();
+const path = require('path');
 
-const app = express()
+app.set('view engine', 'pug');
+app.set('views', 'views')
 
-const server = http.createServer(app)
 
-app.use('/add-product', (req, res, next)=>{
-    console.log('mali the head');
-    res.send('<h1>add product to the category page</h1>')
-   
+// Import route modules
+const adminData = require("./routes/admin.js");
+const shopData = require("./routes/shop.js");
+
+// Middleware to parse URL-encoded form data
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.join(__dirname, "public")));
+
+
+
+// Mount route handlers with prefixes
+// app.use( adminRoutes); // All routes in adminRoutes will be prefixed with /admin
+ // All routes in shopRoutes will be prefixed with /shop
+app.use(adminData.routes);
+app.use(shopData); 
+
+
+app.use((req, res, next) => {
+    res.status(404).sendFile(path.resolve(process.cwd(), "views", "404.html"));
+  });
+  
+
+// Start the server
+app.listen(3000, () => {
+    console.log('Server is running on port 3000');
 });
-app.use('/', (req, res, next)=>{
-    console.log('mali the head');
-    res.send('<h1>Hello express app</h1>')
-   
-});
-
-app.listen(3000);
-
-
