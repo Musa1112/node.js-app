@@ -99,6 +99,8 @@ main {
   background: white;
   border-radius: 3px;
   cursor: pointer;
+  justify-content: center;
+  
 }
 
 .btn:hover,
